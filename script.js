@@ -112,39 +112,130 @@ function rightBykIII() {
     console.log(arr);
 }
 
-function removeDuplicates(){
+function removeDuplicates() {
+    let nums = [1, 1, 2, 2, 2, 2, 3, 3, 4]
+    let j = 1
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] !== nums[i - 1]) {
+            nums[j] = nums[i]
+            j++
+        }
+    }
+    console.log(nums.slice(0, j));
 
 }
 
-function mergeArr1(){
+function mergeSortedArr() {
+    let arr1 = [2, 4, 6]
+    let arr2 = [1, 3, 5, 8]
+    let merge = new Array(arr1.length + arr2.length)
+    let i = 0;
+    let j = 0;
+    let k = 0;
+    while (i < arr1.length && j < arr2.length) {
+        if (arr1[i] < arr2[j]) {
+            merge[k++] = arr1[i++]
+        }
+        else {
+            merge[k++] = arr2[j++]
+        }
+    }
+
+    while (j < arr2.length) {
+        merge[k++] = arr2[j++]
+    }
+
+    while (i < arr1.length) {
+        merge[k++] = arr1[i++]
+    }
+
+    console.log(merge);
 
 }
 
-function mergeArr2(){
+function bestTimeToBuyAndSellStocks() {
+    let prices = [7, 1, 5, 3, 6, 4]
+    let maxProfit = 0
+    let min = prices[0]
+    for (let i = 0; i < prices.length; i++) {
+        if (prices[i] < min) min = prices[i]
+        let profit = prices[i] - min;
+        maxProfit = Math.max(maxProfit, profit)
+    }
+    console.log(maxProfit);
 
 }
 
-function stocks1(){
+function sortColors() {
+    let arr = [2, 0, 1]
+    let i = 0;
+    let j = 0;
+    let k = arr.length - 1
+    while (i <= k) {
+        if (arr[i] == 0) {
+            [arr[i], arr[j]] = [arr[j], arr[i]]
+            i++;
+            j++;
+        }
+        else if (arr[i] == 2) {
+            [arr[i], arr[k]] = [arr[k], arr[i]];
+            k--;
+        }
+        else i++
+    }
+    console.log(arr);
 
 }
 
-function stocks2(){
+function maxSubArray() {//Kadane's algo
+    let arr = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
+    let max = -Infinity;
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i]
+        max = Math.max(max, sum)
+        if (sum < 0) sum = 0
+    }
+    console.log(max);
 
 }
 
-function sortColors(){
-
+function majorityElem() {//Moore's voting algo
+    let arr = [3, 3, 4];
+    let ans = arr[0]
+    let count = 1
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] == ans) count++
+        else count--
+        if (count == 0) {
+            ans = arr[i]
+            count = 1
+        }
+    }
+    console.log(ans);
 }
 
-function maxSubArray(){//Kadane's algo
-
-}
-
-function majorityElem(){//Moore's voting algo
-
-}
-
-function trappingRainWater(){
+function trappingRainWater() {
+    let height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+    let left = new Array(height.length)
+    let right = new Array(height.length)
+    let maxLeft = height[0]
+    let maxRight = height[height.length - 1]
+    left[0] = maxLeft
+    right[height.length - 1] = maxRight
+    let ans = 0;
+    for (let i = 1; i < height.length; i++) {
+        maxLeft = Math.max(maxLeft, height[i])
+        left[i] = maxLeft
+    }
+    for (let i = height.length - 2; i >= 0; i--) {
+        maxRight = Math.max(maxRight, height[i])
+        right[i] = maxRight
+    }
+    for (let i = 0; i < height.length; i++) {
+        ans += Math.min(left[i], right[i]) - height[i]
+    }
+    console.log(ans);
 
 }
 
@@ -160,12 +251,10 @@ function trappingRainWater(){
 // leftBykIII() //--> reverse algo
 // rightBykIII() //--> reverse algo
 
-removeDuplicates()
-mergeArr1()
-mergeArr2()
-stocks1()
-stocks2()
-sortColors()
-maxSubArray()
-majorityElem()
-trappingRainWater()
+// removeDuplicates()
+// mergeSortedArr()
+// bestTimeToBuyAndSellStocks()
+// sortColors()
+// maxSubArray()
+// majorityElem()
+// trappingRainWater()
